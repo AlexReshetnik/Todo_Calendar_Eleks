@@ -1,0 +1,148 @@
+.InputTodoGroups {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+  .content {
+    width: 100%;
+    z-index: 2;
+
+    .topHeader {
+      position: absolute;
+      background: rgb(253, 253, 253);
+      box-shadow: 0px 0px 6px -1px rgba(0, 0, 0, 0.295);
+      border-radius: 6px;
+      font-size: 10px;
+      padding: 0 4px;
+      margin-top: -2px;
+      left: 10px;
+      top: -12px;
+      height: 20px;
+      z-index: 1;
+    }
+
+    input {
+      background: rgb(253, 253, 253);
+      position: relative;
+      z-index: 2;
+      max-width: none;
+      padding: 5px;
+      padding-right: 65px;
+      padding-left: 12px;
+      display: block;
+      height: 40px;
+      width: 100%;
+      border: 1px solid rgba(200, 200, 200, 0);
+      box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.295);
+      outline: none;
+      border-radius: 12px;
+      color: #000000;
+      font-size: 1em;
+      &::-webkit-input-placeholder {
+        font-size: 0.8em;
+      }
+
+      &:hover {
+        color: #1976d2;
+      }
+      &:focus {
+        color: black;
+      }
+    }
+
+    .dropDounList {
+      box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.295);
+      position: absolute;
+      display: none;
+      margin-top: 7px;
+      padding: 1px 0;
+      border-radius: 12px;
+      width: 100%;
+      background: rgb(243, 243, 243);
+      .MenuItem {
+        width: 100%;
+        padding: 0 13px;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.233);
+        &:nth-last-child(1) {
+          border-bottom: none;
+        }
+        &:hover {
+          color: #1976d2;
+
+          .deleteIcon {
+            color: #1976d2;
+            opacity: 1;
+          }
+        }
+        .bloc {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          .count {
+            margin: 2px 0;
+            width: 20px;
+          }
+        }
+        .deleteIcon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transform: scale(0.85);
+          opacity: 0;
+          &:hover {
+            color: #1976d2;
+            fill: #1976d2;
+          }
+        }
+        .openIcon {
+          margin-top: 5px;
+          transform: scale(0.8);
+        }
+      }
+    }
+  }
+
+  .checkMark {
+    box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.295);
+
+    width: 24px;
+    height: 24px;
+    border-radius: 7px;
+    z-index: 100;
+    color: #1976d2;
+    position: absolute;
+    left: 68%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.1s;
+    transform: scale(0.85);
+    &.active {
+      transform: scale(0.84) rotate(180deg);
+    }
+    &:hover {
+      color: #1976d2;
+    }
+  }
+  .btAdd {
+    box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.295);
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    z-index: 100;
+    position: absolute;
+    left: 83%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1976d2;
+    &:hover {
+      color: #1976d2;
+    }
+    &:active {
+      color: #1359a0;
+    }
+  }
+}

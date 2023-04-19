@@ -1,0 +1,28 @@
+.TodoItem {
+  display: flex;
+  flex-direction: row;
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.233);
+  &:nth-last-child(1) {
+    border-bottom: none;
+  }
+  .Radio {
+    margin: 3px;
+    width: 25px;
+    height: 25px;
+
+    & {
+      color: rgb(153 153 153 / 60%);
+    }
+  }
+  textarea {
+   
+    background-color: #ffffff00;
+    border: none;
+    outline: none;
+    resize: none;
+    
+    padding: 8px 0 4px 0;
+   
+  }
+}

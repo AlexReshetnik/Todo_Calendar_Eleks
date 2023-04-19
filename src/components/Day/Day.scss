@@ -1,0 +1,57 @@
+.Day {
+  width:100%;
+  min-width: 120px;
+  min-height: calc(100vh / 5);
+  border-bottom: 0.5px solid #2f77bf83;
+  border-left: 0.5px solid #2f77bf83;
+  border-radius: 35px;
+
+  &:nth-child(1) {
+    border-top: 0.5px solid #2f77bf83;
+  }
+  &:nth-child(2) {
+    border-top: 0.5px solid #2f77bf83;
+  }
+  &:nth-child(3) {
+    border-top: 0.5px solid #2f77bf83;
+  }
+  &:nth-child(4) {
+    border-top: 0.5px solid #2f77bf83;
+  }
+  &:nth-child(5) {
+    border-top: 0.5px solid #2f77bf83;
+  }
+  &:nth-child(6) {
+    border-top: 0.5px solid #2f77bf83;
+  }
+  &:nth-child(7) {
+    border-top: 0.5px solid #2f77bf83;
+  }
+  &:nth-child(7n) {
+    border-right: 0.5px solid #2f77bf83;
+  }
+  &:nth-last-child(1) {
+    border-right: 0.5px solid #2f77bf83;
+  }
+
+  .container {
+    position: relative;
+    padding: 5px;
+    padding-right: 12px;
+    width: 100%;
+    height: 100%;
+
+    .numeric {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      color: #2f77bf;
+      position: absolute;
+      top: -10px;
+      left: -10px;
+    }
+    background-color: #ffffff;
+  }
+}
