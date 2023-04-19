@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+Зміст практики
+Після обрання платформи і мови програмування, керівником від бази практики був наданий перелік завдань, встановлено терміни для їхнього виконання. Метою завдань було набуття практичних навичок розробки програмного забезпечення, а також закріплення вже наявних теоретичних і практичних навичок обраної мови програмування. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Завдання поділялись на три групи:
+Задовільно;
+Добре;
+Відмінно;
+Кількість завдання на виконання – на вибір студента.
+Студентом обрано завдання з рівня Добре. Створити програму для обліку поточних завдання (список завдань). 
+Користувач повинен мати змогу:
+ • Додавати нові завдання (після додавання завдання воно зявляється в списку завдань). 
+• Позначати завдання як виконане (після виконання завдання зникає зі списку). 
+• Видалити завдання (після видалення завдання зникає зі списку). 
+ • Переглядати історію останніх 10-ти виконаних та видалених завдань.
+Програма повинна зберігати свій стан, тобто після перезапуску списки завдань і історія повинні відновитись. Сховище даних обирається самостійно (Database, XML, JSON).
 
-## Available Scripts
+Варте до  уваги що вибрана задача не є високої складності , але я вибрав саме її , через цікавість до теми. Тому для себе додатково було покладені такі завдання :
+•	Реалізувати можливість (створення , видалення і перегляд) груп з todo
+•	Придумати компоненту, яка матиме вигляд багато функціонального поля вводу
+•	Реалізувати систему календаря, де кожен день буде своєрідним todo списком
+•	Можливість переміщувати todo між групами і полями календаря
+•	Механізм ручного сортування lodos і збереження стану
+•	Вибір проміжка відображуваного календаря
+Зміст практики
+Після обрання платформи і мови програмування, керівником від бази практики був наданий перелік завдань, встановлено терміни для їхнього виконання. Метою завдань було набуття практичних навичок розробки програмного забезпечення, а також закріплення вже наявних теоретичних і практичних навичок обраної мови програмування. 
 
-In the project directory, you can run:
+Завдання поділялись на три групи:
+Задовільно;
+Добре;
+Відмінно;
+Кількість завдання на виконання – на вибір студента.
+Студентом обрано завдання з рівня Добре. Створити програму для обліку поточних завдання (список завдань). 
+Користувач повинен мати змогу:
+ • Додавати нові завдання (після додавання завдання воно зявляється в списку завдань). 
+• Позначати завдання як виконане (після виконання завдання зникає зі списку). 
+• Видалити завдання (після видалення завдання зникає зі списку). 
+ • Переглядати історію останніх 10-ти виконаних та видалених завдань.
+Програма повинна зберігати свій стан, тобто після перезапуску списки завдань і історія повинні відновитись. Сховище даних обирається самостійно (Database, XML, JSON).
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Варте до  уваги що вибрана задача не є високої складності , але я вибрав саме її , через цікавість до теми. Тому для себе додатково було покладені такі завдання :
+•	Реалізувати можливість (створення , видалення і перегляд) груп з todo
+•	Придумати компоненту, яка матиме вигляд багато функціонального поля вводу
+•	Реалізувати систему календаря, де кожен день буде своєрідним todo списком
+•	Можливість переміщувати todo між групами і полями календаря
+•	Механізм ручного сортування lodos і збереження стану
+•	Вибір проміжка відображуваного календаря
