@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/Todo_Calendar_Eleks/static/css/main.275ff4ec.css",
-    "main.js": "/Todo_Calendar_Eleks/static/js/main.d02c8b69.js",
+    "main.css": "/Todo_Calendar_Eleks/static/css/main.c228b3a5.css",
+    "main.js": "/Todo_Calendar_Eleks/static/js/main.309c74dc.js",
     "index.html": "/Todo_Calendar_Eleks/index.html",
     "static/media/black_folder.svg": "/Todo_Calendar_Eleks/static/media/black_folder.01354333db426c26b84d8b7354d39abc.svg",
-    "main.275ff4ec.css.map": "/Todo_Calendar_Eleks/static/css/main.275ff4ec.css.map",
-    "main.d02c8b69.js.map": "/Todo_Calendar_Eleks/static/js/main.d02c8b69.js.map"
+    "main.c228b3a5.css.map": "/Todo_Calendar_Eleks/static/css/main.c228b3a5.css.map",
+    "main.309c74dc.js.map": "/Todo_Calendar_Eleks/static/js/main.309c74dc.js.map"
   },
   "entrypoints": [
-    "static/css/main.275ff4ec.css",
-    "static/js/main.d02c8b69.js"
+    "static/css/main.c228b3a5.css",
+    "static/js/main.309c74dc.js"
   ]
 }
