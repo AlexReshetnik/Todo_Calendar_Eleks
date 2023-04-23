@@ -1,6 +1,7 @@
 import InputTodoGroups from "./InputTodoGroups/InputTodoGroups";
 import TodoList from "../TodoList/TodoList";
 import "./TodoListComponent.scss";
+import { memo } from "react";
 
 function TodoListComponent() {
 
@@ -11,4 +12,4 @@ function TodoListComponent() {
 		</div>
 	);
 }
-export default TodoListComponent;
+export default  memo(TodoListComponent,()=>true);

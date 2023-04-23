@@ -4,7 +4,7 @@
   overflow-y: scroll;
 
   .container {
- 
+ height:  fit-content !important;
     display: flex;
     flex-direction: column;
   }

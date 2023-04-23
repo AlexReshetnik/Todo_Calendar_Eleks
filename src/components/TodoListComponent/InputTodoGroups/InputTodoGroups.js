@@ -1,11 +1,15 @@
-import "./InputTodoGroups.scss";
-import { useEffect, useRef, useState } from "react";
-import AddIcon from "@mui/icons-material/Add";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { ReactComponent as BlackFolder } from "../../../assets/icons/black_folder.svg";
-import ArrowDownwardOutlinedIcon from "@mui/icons-material/ArrowDownwardOutlined";
-import { useSelector, useDispatch } from "react-redux";
-import { CREATE_GROUP, DELETE_GROUP, SET_CURRENT_GROUP_ID } from "../../../store/groups/types";
+import './InputTodoGroups.scss';
+import {useEffect, useRef, useState} from 'react';
+import AddIcon from '@mui/icons-material/Add';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import {ReactComponent as BlackFolder} from '../../../assets/icons/black_folder.svg';
+import ArrowDownwardOutlinedIcon from '@mui/icons-material/ArrowDownwardOutlined';
+import {useSelector, useDispatch} from 'react-redux';
+import {
+  CREATE_GROUP,
+  DELETE_GROUP,
+  SET_CURRENT_GROUP_ID,
+} from '../../../store/groups/types';
 
 function InputTodoGroups() {
   const inputRef = useRef();
@@ -20,23 +24,25 @@ function InputTodoGroups() {
   const listGroups = useSelector(state => state.groups.groups);
   const todos = useSelector(state => state.todos.todos);
 
-  const [value, setValue] = useState(listGroups.find(i => i.id == currentGroupID)?.title || "");
+  const [value, setValue] = useState(
+    listGroups.find(i => i.id == currentGroupID)?.title || ''
+  );
 
   function handleChange(e) {
-    let value = e.currentTarget.getAttribute("value");
-    dispatch({ type: SET_CURRENT_GROUP_ID, payload: { groupID: value } });
+    let value = e.currentTarget.getAttribute('value');
+    dispatch({type: SET_CURRENT_GROUP_ID, payload: {groupID: value}});
     setIsOpenDropDownList(false);
   }
 
   function onChange(e) {
-    if (!e.target.value) return;
+    //if (!e.target.value) return;
     setValue(e.target.value);
-    console.log('setValue');
+    //console.log('setValue');
   }
 
   function onFocus(e) {
     if (disabled.current) {
-       inputRef.current.blur();
+      inputRef.current.blur();
     }
   }
 
@@ -48,7 +54,7 @@ function InputTodoGroups() {
   }
 
   function addHandler() {
-    setValue("");
+    setValue('');
     disabled.current = false;
     inputRef.current.focus();
     inputRef.current.onblur = e => {
@@ -61,7 +67,7 @@ function InputTodoGroups() {
           disabled.current = false;
         }
       } else {
-        dispatch({ type: CREATE_GROUP, payload: {title: e.target.value } });
+        dispatch({type: CREATE_GROUP, payload: {title: e.target.value}});
         inputRef.current.onblur = undefined;
         disabled.current = true;
       }
@@ -69,8 +75,8 @@ function InputTodoGroups() {
   }
 
   function deleteHandler(e) {
-    let targetid = e.currentTarget.getAttribute("value");
-    dispatch({ type: DELETE_GROUP, payload: { deleteID: targetid } });
+    let targetid = e.currentTarget.getAttribute('value');
+    dispatch({type: DELETE_GROUP, payload: {deleteID: targetid}});
     e.stopPropagation();
   }
 
@@ -91,9 +97,9 @@ function InputTodoGroups() {
   }
 
   useEffect(() => {
-    inputRef.current.addEventListener("keydown", keydown);
+    inputRef.current.addEventListener('keydown', keydown);
     return () => {
-      inputRef.curren.removeEventListener("keydown", keydown);
+      inputRef.curren.removeEventListener('keydown', keydown);
     };
   }, [inputRef]);
 
@@ -115,45 +121,75 @@ function InputTodoGroups() {
   }, [currentGroupID]);
 
   useEffect(() => {
-    dropDownList.current.addEventListener("mouseover", mouseover);
-    dropDownList.current.addEventListener("mouseout", mouseout);
+    dropDownList.current.addEventListener('mouseover', mouseover);
+    dropDownList.current.addEventListener('mouseout', mouseout);
     return () => {
-      dropDownList.current.removeEventListener("mouseover", mouseover);
-      dropDownList.current.removeEventListener("mouseout", mouseout);
+      dropDownList.current.removeEventListener('mouseover', mouseover);
+      dropDownList.current.removeEventListener('mouseout', mouseout);
     };
   }, []);
 
   useEffect(() => {
-    if (isOpenDropDownList) dropDownList.current.classList.add("open");
-    else dropDownList.current.classList.remove("open");
+    if (isOpenDropDownList) dropDownList.current.classList.add('open');
+    else dropDownList.current.classList.remove('open');
   }, [isOpenDropDownList]);
 
   return (
     <div className='InputTodoGroups'>
       <div className='content'>
         <div className='topHeader'>Group</div>
-        <input type='text' placeholder='Create new group...' ref={inputRef} value={value} onClick={Open} onChange={onChange} onFocus={onFocus} />
+        <input
+          type='text'
+          placeholder='Create new group...'
+          ref={inputRef}
+          value={value}
+          onClick={Open}
+          onChange={onChange}
+          onFocus={onFocus}
+        />
 
-        <div ref={dropDownList} className='dropDounList' style={{ display: isOpenDropDownList ? "inherit" : "none" }}>
+        <div
+          ref={dropDownList}
+          className='dropDounList'
+          style={{display: isOpenDropDownList ? 'inherit' : 'none'}}>
           {listGroups.map(group => (
-            <div key={group.id} value={group.id} className='MenuItem' onClick={handleChange}>
+            <div
+              key={group.id}
+              value={group.id}
+              className='MenuItem'
+              onClick={handleChange}>
               <div className='bloc'>
                 <span className='openIcon' value={group.id}>
-                  <BlackFolder style={{ fill: currentGroupID === group.id ? "#1976d2" : "black" }} />
+                  <BlackFolder
+                    style={{
+                      fill: currentGroupID === group.id ? '#1976d2' : 'black',
+                    }}
+                  />
                 </span>
 
                 {group.title}
               </div>
 
-              <span className='deleteIcon' value={group.id} onClick={deleteHandler}>
-                <div className='count'>{todos.filter(i => i.idGroup == group.id && i.isDeleted == false).length}</div>
+              <span
+                className='deleteIcon'
+                value={group.id}
+                onClick={deleteHandler}>
+                <div className='count'>
+                  {
+                    todos.filter(
+                      i => i.idGroup == group.id && i.isDeleted == false
+                    ).length
+                  }
+                </div>
                 <DeleteForeverIcon />
               </span>
             </div>
           ))}
         </div>
       </div>
-      <div className={`checkMark ${isOpenDropDownList ? "active" : ""}`} onClick={Open}>
+      <div
+        className={`checkMark ${isOpenDropDownList ? 'active' : ''}`}
+        onClick={Open}>
         <ArrowDownwardOutlinedIcon />
       </div>
 

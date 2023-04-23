@@ -1,11 +1,22 @@
 .App {
- 
   .container {
     display: flex;
     flex-direction: row;
     padding-right: 5px;
-     padding-bottom: 20px;
-     height: 100vh;
-    
+    padding-bottom: 20px;
+    height: 100vh;
+
+    .react-split__sash {
+      width: 2px !important;
+      background-color: #2f77bf6c !important;
+      *{
+        :hover{
+          width: 3px;
+        }
+        background-color: #2f77bf71 !important;
+     
+        box-shadow: 0px 0px 10px -1px rgba(0, 0, 0, 0.295);
+      }
+    }
   }
 }

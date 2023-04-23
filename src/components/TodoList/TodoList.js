@@ -1,9 +1,5 @@
-import TodoItem from "../TodoItem/TodoItem";
 import "./TodoList.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { CREATE_TODO } from "../../store/todos/types";
-import { ReactSortable } from "react-sortablejs";
-import { useEffect, useRef, useState } from "react";
+import {  useSelector } from "react-redux";
 import DnDContaiter from "../../containers/DnDContaiter/DnDContaiter";
 
 

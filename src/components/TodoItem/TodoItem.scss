@@ -1,7 +1,7 @@
 .TodoItem {
   display: flex;
   flex-direction: row;
-
+  transition: all 11s ease-out;
   border-bottom: 1px solid rgba(0, 0, 0, 0.233);
   &:nth-last-child(1) {
     border-bottom: none;
@@ -16,13 +16,33 @@
     }
   }
   textarea {
-   
     background-color: #ffffff00;
     border: none;
     outline: none;
     resize: none;
+
+    padding: 8px 0 6px 0;
+  }
+}
+.deleing {
+  animation: deleing 2200ms;
+}
+
+@keyframes deleing {
+  from {
+    opacity: 1;
+  
+  }
+
+ 
+  80% {
+    opacity: 1;
+    transform:translateY(0%)scaleY(100%);
     
-    padding: 8px 0 4px 0;
-   
+  }
+  to {
+    opacity: 0;
+    transform:translateY(-50%)scaleY(0%);
+    
   }
 }
