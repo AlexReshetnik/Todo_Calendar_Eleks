@@ -17,7 +17,6 @@ function TodoItem({item, idGroup, focusItem}) {
   const dispatch = useDispatch();
   const dropDownListTimer = useRef();
   const [title, settitle] = useState(item.title);
-  console.log(item.isChecked);
   const [isChecked, setIsChecked] = useState(item.isChecked);
 
 
@@ -49,7 +48,6 @@ function TodoItem({item, idGroup, focusItem}) {
   }
 
   function onFocus(e) {
-    console.log('onFocus');
     inputRef.current.isCanCreacte = true;
   }
 

@@ -1,7 +1,6 @@
 .TodoItem {
   display: flex;
   flex-direction: row;
-  transition: all 11s ease-out;
   border-bottom: 1px solid rgba(0, 0, 0, 0.233);
   &:nth-last-child(1) {
     border-bottom: none;

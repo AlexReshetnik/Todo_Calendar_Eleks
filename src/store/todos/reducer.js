@@ -63,14 +63,15 @@ const todosReducer = (state = initialState, action) => {
       state.todos.find(i => i.idTodo == action.payload.item).idGroup =
         action.payload.target;
       state = {
-       
-         ...state.todos,
+        ...state,
+        todos: state.todos,
       };
       break;
     case SORT_TODO:
       break;
   }
 
+ 
 state.todos = state.todos.slice();
 /*
   if(!state.todos)return {...state}
