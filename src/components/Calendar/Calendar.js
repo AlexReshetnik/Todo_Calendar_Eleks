@@ -60,12 +60,16 @@ function Calendar() {
     endRef.current.value = end.toISOString().slice(0, 10);
   }, [start, end]);
 
-  let now = new Date(Date.now()).setHours(0, 0, 0, 0);
-
   useEffect(() => {
-    if (document.getElementById(`${now}`)) {
-      calendar.current.scroll(0,document.getElementById(`${now}`).offsetTop - 100);
-    }
+    setTimeout(() => {
+      let now = new Date(Date.now()).setHours(0, 0, 0, 0);
+      if (document.getElementById(`${now}`)) {
+        calendar.current.scrollTo({
+          top: document.getElementById(`${now}`).offsetTop - 100,
+          behavior: 'instant',
+        });
+      }
+    }, 50);
   }, []);
 
   return (
