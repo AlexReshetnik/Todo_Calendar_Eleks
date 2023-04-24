@@ -41,7 +41,7 @@ function Calendar() {
   }
 
   function onChangeEND(e) {
-    setEnd(roundOFF(e.target.value, 5));
+    setEnd(roundOFF(e.target.value, 6));
   }
   function roundOFF(date, offset = 0) {
     let start = new Date(date);

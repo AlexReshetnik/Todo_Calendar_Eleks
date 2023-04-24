@@ -128,12 +128,13 @@ function TodoItem({item, idGroup, focusItem}) {
         checked={isChecked}
         onClick={handleChange}
         value={isChecked}
-        style={idGroup < now?{color: "#a8a8a893"}:{}}
+        style={idGroup < now ? {color: '#a8a8a893'} : {}}
       />
       <TextareaAutosize
         aria-label='empty textarea'
         ref={inputRef}
         type='text'
+        style={isChecked && idGroup < now ? {color: '#a8a8a893'} : {}}
         value={title}
         onChange={inputHandler}
         onFocus={onFocus}
