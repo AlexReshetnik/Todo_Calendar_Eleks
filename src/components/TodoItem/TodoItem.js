@@ -13,7 +13,6 @@ import {
 function TodoItem({item, idGroup, focusItem}) {
   const inputRef = useRef();
   const selectionStart = useRef();
-  console.log(item);
   const dispatch = useDispatch();
   const dropDownListTimer = useRef();
   const [title, settitle] = useState(item.title);

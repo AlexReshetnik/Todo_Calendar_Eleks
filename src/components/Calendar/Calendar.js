@@ -3,6 +3,8 @@ import Day from '../Day/Day';
 import './Calendar.scss';
 
 function Calendar() {
+  let calendar = useRef();
+
   let startRef = useRef();
   let endRef = useRef();
 
@@ -58,8 +60,16 @@ function Calendar() {
     endRef.current.value = end.toISOString().slice(0, 10);
   }, [start, end]);
 
+  let now = new Date(Date.now()).setHours(0, 0, 0, 0);
+
+  useEffect(() => {
+    if (document.getElementById(`${now}`)) {
+      calendar.current.scroll(0,document.getElementById(`${now}`).offsetTop - 100);
+    }
+  }, []);
+
   return (
-    <div className='Calendar'>
+    <div className='Calendar' ref={calendar}>
       <header>
         <input
           ref={startRef}
