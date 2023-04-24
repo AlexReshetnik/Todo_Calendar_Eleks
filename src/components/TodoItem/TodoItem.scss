@@ -11,15 +11,15 @@
     height: 25px;
 
     & {
-      color: rgb(153 153 153 / 60%);
+      color: #99999999;
     }
   }
   textarea {
+    width: 90%;
     background-color: #ffffff00;
     border: none;
     outline: none;
     resize: none;
-
     padding: 8px 0 6px 0;
   }
 }
@@ -30,18 +30,14 @@
 @keyframes deleing {
   from {
     opacity: 1;
-  
   }
 
- 
   80% {
     opacity: 1;
-    transform:translateY(0%)scaleY(100%);
-    
+    transform: translateY(0%) scaleY(100%);
   }
   to {
     opacity: 0;
-    transform:translateY(-50%)scaleY(0%);
-    
+    transform: translateY(-50%) scaleY(0%);
   }
 }

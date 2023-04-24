@@ -18,16 +18,18 @@ function Calendar() {
 
   function generate() {
     let res = [];
-    let now = roundOFF(Date.now()).getDay()+5;
-    console.log();
+    let now = new Date(Date.now()).setHours(0, 0, 0, 0);
+
     for (let i = 0; i <= countDays; i++) {
       let numeric = new Date(+start + i * day).setHours(0, 0, 0, 0);
 
-      if (i == now) {
-        res.push(<Day key={numeric}  className={'now'} numeric={numeric} />);
-      } else {
-        res.push(<Day key={numeric} numeric={numeric} />);
-      }
+      res.push(
+        <Day
+          key={numeric}
+          className={`${numeric == now ? 'now' : ''}`}
+          numeric={numeric}
+        />
+      );
     }
     return res;
   }
@@ -37,9 +39,9 @@ function Calendar() {
   }
 
   function onChangeEND(e) {
-    setEnd(roundOFF(e.target.value, 6));
+    setEnd(roundOFF(e.target.value, 5));
   }
-  function roundOFF(date, offset=0) {
+  function roundOFF(date, offset = 0) {
     let start = new Date(date);
     let nDay = start.getDay() - 1;
     if (nDay == -1) {

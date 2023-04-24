@@ -6,11 +6,17 @@ import TodoItem from '../../components/TodoItem/TodoItem';
 
 function DnDContaiter({idGroup}) {
   const dispatch = useDispatch();
+  let now = new Date(Date.now()).setHours(0, 0, 0, 0);
   const todos = useSelector(
-    state =>
-      state.todos.todos.filter(
-        i => i.idGroup == idGroup && i.isDeleted === false
-      ),
+    state => {
+      if (idGroup < now) {
+        return state.todos.todos.filter(i => i.idGroup == idGroup);
+      } else {
+        return state.todos.todos.filter(
+          i => i.idGroup == idGroup && i.isDeleted == false
+        );
+      }
+    },
     (oldValue, newValue) => {
       return oldValue.length == newValue.length;
     }

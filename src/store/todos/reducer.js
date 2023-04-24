@@ -47,7 +47,7 @@ const todosReducer = (state = initialState, action) => {
     case DELETE_TODO:
       state.todos.find(
         i => i.idTodo === action.payload.idTodo
-      ).isDeleted = true;
+      ).isDeleted = action.payload.isDeleted;
       state = {
         ...state,
         todos: state.todos,

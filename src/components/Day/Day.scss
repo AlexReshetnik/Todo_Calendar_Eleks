@@ -1,11 +1,21 @@
 .Day {
-  width:100%;
+  
+  width: 100%;
   min-width: 120px;
   min-height: calc(100vh / 5);
   border-bottom: 0.5px solid #2f77bf83;
   border-left: 0.5px solid #2f77bf83;
   border-radius: 35px;
-
+  &.now {
+    .numeric{
+      color:white !important;
+      background: rgba(255, 0, 0, 0.853);
+      border-radius: 50%;
+      font-size: 80%;
+      transform: scale(1.1);
+      padding: 5px;
+    }
+  }
   &:nth-child(1) {
     border-top: 0.5px solid #2f77bf83;
   }
@@ -42,15 +52,18 @@
     height: 100%;
 
     .numeric {
+      user-select:none;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 20px;
-      height: 20px;
+      width: 30px;
+      height: 30px;
       color: #2f77bf;
       position: absolute;
-      top: -10px;
-      left: -10px;
+      top: -15px;
+      left: -15px;
+      font-family: "Newsreader", serif;
+      font-weight: 400;
     }
     background-color: #ffffff;
   }

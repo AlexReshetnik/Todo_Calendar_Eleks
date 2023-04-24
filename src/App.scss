@@ -1,4 +1,10 @@
 .App {
+ *{
+  font-family: 'Times New Roman', serif;
+
+  font-weight: 100;
+ 
+ }
   .container {
     display: flex;
     flex-direction: row;

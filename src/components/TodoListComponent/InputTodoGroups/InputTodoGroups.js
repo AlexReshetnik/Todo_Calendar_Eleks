@@ -36,7 +36,9 @@ function InputTodoGroups() {
 
   function onChange(e) {
     //if (!e.target.value) return;
-    setValue(e.target.value);
+    let str = e.target.value;
+    let newStr = str[0].toUpperCase() + str.slice(1);
+    setValue(newStr);
     //console.log('setValue');
   }
 

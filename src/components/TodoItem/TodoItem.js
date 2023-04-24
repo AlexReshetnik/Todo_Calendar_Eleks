@@ -13,37 +13,37 @@ import {
 function TodoItem({item, idGroup, focusItem}) {
   const inputRef = useRef();
   const selectionStart = useRef();
-
+  console.log(item);
   const dispatch = useDispatch();
   const dropDownListTimer = useRef();
   const [title, settitle] = useState(item.title);
-  const [isChecked, setIsChecked] = useState(item.isChecked);
-
+  const [isChecked, setIsChecked] = useState(item.isDeleted);
+  let now = new Date(Date.now()).setHours(0, 0, 0, 0);
 
   //подія видалення todo
   function handleChange(e) {
     setIsChecked(prev => !prev);
-    //dispatch({type: CHANGE_TODO, payload: item});
     document.getElementById(`${item.idTodo}`).classList.remove('deleing');
     clearTimeout(dropDownListTimer.current);
-   
-  }
-  useEffect(() => {
-    if (isChecked === true) {
+    item.isDeleted = !item.isDeleted;
+    if (idGroup >= now) {
       document.getElementById(`${item.idTodo}`).classList.add('deleing');
       dropDownListTimer.current = setTimeout(() => {
         dispatch({type: DELETE_TODO, payload: item});
       }, 2000);
+    } else {
+      dispatch({type: DELETE_TODO, payload: item});
     }
-  }, [isChecked]);
- 
+  }
 
   //подія onChange
   function inputHandler(e) {
-    settitle(e.target.value);
+    let str = e.target.value;
+    let newStr = str && str[0].toUpperCase() + str.slice(1);
+    settitle(newStr);
     dispatch({
       type: SET_TITLE,
-      payload: {idTodo: item.idTodo, title: e.target.value},
+      payload: {idTodo: item.idTodo, title: newStr},
     });
   }
 
@@ -101,7 +101,7 @@ function TodoItem({item, idGroup, focusItem}) {
   //якщо відмічений то обертаємо стан на невідмічений
   useEffect(() => {
     if (isChecked === true) {
-      dispatch({type: CHANGE_TODO, payload: item});
+      //dispatch({type: CHANGE_TODO, payload: item});
     }
   }, []);
 
@@ -129,6 +129,7 @@ function TodoItem({item, idGroup, focusItem}) {
         checked={isChecked}
         onClick={handleChange}
         value={isChecked}
+        style={idGroup < now?{color: "#a8a8a893"}:{}}
       />
       <TextareaAutosize
         aria-label='empty textarea'
@@ -144,7 +145,6 @@ function TodoItem({item, idGroup, focusItem}) {
 }
 
 export default memo(TodoItem, (prev, next) => {
-  //console.log(prev.isChecked,next.isChecked);
   return (
     prev.item.idGroup == next.item.idGroup &&
     prev.item.idTodo == next.item.idTodo &&
