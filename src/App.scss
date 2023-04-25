@@ -13,6 +13,9 @@
     height: 100vh;
 
     .react-split__sash {
+      @media (max-width :576px){
+        display: none;
+      }
       width: 2px !important;
       background-color: #2f77bf6c !important;
       *{

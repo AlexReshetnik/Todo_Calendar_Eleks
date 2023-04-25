@@ -14,6 +14,7 @@ function App() {
 
   useEffect(() => {
     window.onresize = onResize;
+    onResize()
   }, []);
 
   function onResize() {
