@@ -14,11 +14,13 @@ function App() {
 
   useEffect(() => {
     window.onresize = onResize;
-    onResize()
+    //onResize()
   }, []);
-
+  window.resizeTo(500,1000)
   function onResize() {
+    return
     if (window.innerWidth < 576) {
+      window.height=
       setSizes(['100%', 'auto']);
     } else {
       setSizes(['20%', '70%']);
