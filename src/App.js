@@ -7,7 +7,7 @@ import {useEffect, useState} from 'react';
 
 function App() {
   const [sizes, setSizes] = useState(
-    JSON.parse(localStorage.getItem('sizes')) || ['30%', 'auto']
+    JSON.parse(localStorage.getItem('sizes')) || ['20%', 'auto']
   );
   localStorage.setItem('sizes', JSON.stringify(sizes));
  
@@ -20,7 +20,7 @@ function App() {
     if (window.innerWidth < 576) {
       setSizes(['100%', 'auto']);
     } else {
-      setSizes(['30%', '70%']);
+      setSizes(['20%', '70%']);
     }
   }
 

@@ -19,5 +19,16 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      if('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/Todo_Calendar_Eleks/serviceWorker.js').then((reg) => {
+            console.log('Worker Registered')
+          }).catch((err) => {
+            console.log('Error in service worker registration.',err)
+          })
+        })
+      }
+    </script>
    </body>
 </html>

@@ -11,6 +11,7 @@ import {
 } from '../../store/todos/types';
 
 function TodoItem({item, idGroup, focusItem}) {
+  
   const inputRef = useRef();
   const selectionStart = useRef();
   const dispatch = useDispatch();
@@ -18,14 +19,14 @@ function TodoItem({item, idGroup, focusItem}) {
   const [title, settitle] = useState(item.title);
   const [isChecked, setIsChecked] = useState(item.isDeleted);
   let now = new Date(Date.now()).setHours(0, 0, 0, 0);
-
+let isActiveGroup= typeof idGroup ==='string'||idGroup >= now
   //подія видалення todo
   function handleChange(e) {
     setIsChecked(prev => !prev);
     document.getElementById(`${item.idTodo}`).classList.remove('deleing');
     clearTimeout(dropDownListTimer.current);
     item.isDeleted = !item.isDeleted;
-    if (idGroup >= now) {
+    if (isActiveGroup) {
       document.getElementById(`${item.idTodo}`).classList.add('deleing');
       dropDownListTimer.current = setTimeout(() => {
         dispatch({type: DELETE_TODO, payload: item});
@@ -120,7 +121,8 @@ function TodoItem({item, idGroup, focusItem}) {
         inputRef.current.removeEventListener('keydown', keydown);
     };
   });
-
+//if(typeof idGroup ==='string' )
+ // style={idGroup < now ? {color: '#a8a8a893'} : {}}
   return (
     <div className='TodoItem' id={item.idTodo} key={item.idTodo}>
       <Radio
@@ -128,13 +130,13 @@ function TodoItem({item, idGroup, focusItem}) {
         checked={isChecked}
         onClick={handleChange}
         value={isChecked}
-        style={idGroup < now ? {color: '#a8a8a893'} : {}}
+        style={!isActiveGroup ? {color: '#a8a8a893'} : {}}
       />
       <TextareaAutosize
         aria-label='empty textarea'
         ref={inputRef}
         type='text'
-        style={isChecked && idGroup < now ? {color: '#a8a8a893'} : {}}
+        style={isChecked && !isActiveGroup ? {color: '#a8a8a893'} : {}}
         value={title}
         onChange={inputHandler}
         onFocus={onFocus}
