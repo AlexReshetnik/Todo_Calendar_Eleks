@@ -12,7 +12,7 @@ const USER_DATA_KEY = 'GROUPS'; // name of localStorage key
 let LSdata = localStorage.getItem(USER_DATA_KEY);
 
 
-setTimeout(() => {
+/*setTimeout(() => {
   const USER_DATA_KEY = 'GROUPS';
   let LSdata = localStorage.getItem(USER_DATA_KEY);
   if (LSdata) {
@@ -23,7 +23,7 @@ setTimeout(() => {
     });
     localStorage.removeItem(USER_DATA_KEY)
   }
-}, 3000);
+}, 3000);*/
 
 
 let initialState = {

@@ -6,8 +6,8 @@ import {memo} from 'react';
 function TodoListComponent() {
   return (
     <div
-      className={`TodoListComponent ${
-        navigator.userAgentData.mobile ? 'phone' : ''
+      className={`TodoListComponent ${""
+      //  navigator.userAgentData.mobile ? 'phone' : ''
       }`}>
       <InputTodoGroups />
       <TodoList />
