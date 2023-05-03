@@ -76,7 +76,7 @@ function Calendar() {
   return (
     <div
          ref={calendar}
-      className={`Calendar ${navigator.userAgentData.mobile ? 'phone':''}`}>
+      className={`Calendar ${/*navigator.userAgentData.mobile ? 'phone':''*/''}`}>
       <header>
         <input
           ref={startRef}
