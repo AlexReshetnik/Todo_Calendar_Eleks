@@ -6,10 +6,11 @@ import {ReactComponent as BlackFolder} from '../../../assets/icons/black_folder.
 import ArrowDownwardOutlinedIcon from '@mui/icons-material/ArrowDownwardOutlined';
 import {useSelector, useDispatch} from 'react-redux';
 import {
-  CREATE_GROUP,
-  DELETE_GROUP,
-  SET_CURRENT_GROUP_ID,
-} from '../../../store/groups/types';
+  createGroup,
+  deleteGroup,
+  setCurrentGroup,
+  setGroups,
+} from '../../../store/groups/actions';
 
 function InputTodoGroups() {
   const inputRef = useRef();
@@ -30,16 +31,14 @@ function InputTodoGroups() {
 
   function handleChange(e) {
     let value = e.currentTarget.getAttribute('value');
-    dispatch({type: SET_CURRENT_GROUP_ID, payload: {groupID: value}});
+    dispatch(setCurrentGroup(value));
     setIsOpenDropDownList(false);
   }
 
   function onChange(e) {
-    //if (!e.target.value) return;
     let str = e.target.value;
-    let newStr = str[0].toUpperCase() + str.slice(1);
+    let newStr = str[0]?.toUpperCase() + str.slice(1);
     setValue(newStr);
-    //console.log('setValue');
   }
 
   function onFocus(e) {
@@ -69,7 +68,8 @@ function InputTodoGroups() {
           disabled.current = false;
         }
       } else {
-        dispatch({type: CREATE_GROUP, payload: {title: e.target.value}});
+        dispatch(createGroup(e.target.value));
+
         inputRef.current.onblur = undefined;
         disabled.current = true;
       }
@@ -78,7 +78,7 @@ function InputTodoGroups() {
 
   function deleteHandler(e) {
     let targetid = e.currentTarget.getAttribute('value');
-    dispatch({type: DELETE_GROUP, payload: {deleteID: targetid}});
+    dispatch(deleteGroup(targetid));
     e.stopPropagation();
   }
 
@@ -99,9 +99,9 @@ function InputTodoGroups() {
   }
 
   useEffect(() => {
-    inputRef.current.addEventListener('keydown', keydown);
+    inputRef.current?.addEventListener('keydown', keydown);
     return () => {
-      inputRef.curren.removeEventListener('keydown', keydown);
+      inputRef.curren?.removeEventListener('keydown', keydown);
     };
   }, [inputRef]);
 
@@ -118,7 +118,7 @@ function InputTodoGroups() {
 
   useEffect(() => {
     if (currentGroupID) {
-      setValue(listGroups.find(i => i.id === currentGroupID).title);
+      setValue(listGroups.find(i => i.id === currentGroupID)?.title);
     }
   }, [currentGroupID]);
 
@@ -126,8 +126,8 @@ function InputTodoGroups() {
     dropDownList.current.addEventListener('mouseover', mouseover);
     dropDownList.current.addEventListener('mouseout', mouseout);
     return () => {
-      dropDownList.current.removeEventListener('mouseover', mouseover);
-      dropDownList.current.removeEventListener('mouseout', mouseout);
+      dropDownList.current?.removeEventListener('mouseover', mouseover);
+      dropDownList.current?.removeEventListener('mouseout', mouseout);
     };
   }, []);
 

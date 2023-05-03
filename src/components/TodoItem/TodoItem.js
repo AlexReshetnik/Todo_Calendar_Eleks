@@ -2,37 +2,34 @@ import {Radio} from '@mui/material';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import './TodoItem.scss';
 import {memo, useEffect, useRef, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {
-  CHANGE_TODO,
-  CREATE_TODO,
-  DELETE_TODO,
-  SET_TITLE,
-} from '../../store/todos/types';
+import {useDispatch} from 'react-redux';
+import {createTodo, deteleTodo, setTitle} from '../../store/todos/actions';
 
 function TodoItem({item, idGroup, focusItem}) {
-  
   const inputRef = useRef();
   const selectionStart = useRef();
   const dispatch = useDispatch();
   const dropDownListTimer = useRef();
+  const setTitleTimer = useRef();
   const [title, settitle] = useState(item.title);
   const [isChecked, setIsChecked] = useState(item.isDeleted);
   let now = new Date(Date.now()).setHours(0, 0, 0, 0);
-let isActiveGroup= typeof idGroup ==='string'||idGroup >= now
+  let isActiveGroup = typeof idGroup === 'string' || idGroup >= now;
   //подія видалення todo
   function handleChange(e) {
     setIsChecked(prev => !prev);
     document.getElementById(`${item.idTodo}`).classList.remove('deleing');
+    window.navigator.vibrate(200);
     clearTimeout(dropDownListTimer.current);
     item.isDeleted = !item.isDeleted;
     if (isActiveGroup) {
       document.getElementById(`${item.idTodo}`).classList.add('deleing');
       dropDownListTimer.current = setTimeout(() => {
-        dispatch({type: DELETE_TODO, payload: item});
+        dispatch(deteleTodo(item));
+        window.navigator.vibrate(50);
       }, 2000);
     } else {
-      dispatch({type: DELETE_TODO, payload: item});
+      dispatch(deteleTodo(item));
     }
   }
 
@@ -41,10 +38,15 @@ let isActiveGroup= typeof idGroup ==='string'||idGroup >= now
     let str = e.target.value;
     let newStr = str && str[0].toUpperCase() + str.slice(1);
     settitle(newStr);
-    dispatch({
-      type: SET_TITLE,
-      payload: {idTodo: item.idTodo, title: newStr},
-    });
+
+    if (newStr.length > 2) {
+      clearTimeout(setTitleTimer.current);
+      setTitleTimer.current = setTimeout(() => {
+        dispatch(setTitle(item, newStr));
+      }, 1000);
+    } else {
+      dispatch(setTitle(item, newStr));
+    }
   }
 
   function onFocus(e) {
@@ -75,10 +77,7 @@ let isActiveGroup= typeof idGroup ==='string'||idGroup >= now
               .childNodes[1];
             el.focus();
           } else {
-            dispatch({
-              type: CREATE_TODO,
-              payload: {idGroup: idGroup, title: 'ㅤ'},
-            });
+            dispatch(createTodo(idGroup, 'ㅤ'));
           }
           focusItem.current = null;
         }
@@ -98,22 +97,14 @@ let isActiveGroup= typeof idGroup ==='string'||idGroup >= now
     }
   }, [title]);
 
-  //якщо відмічений то обертаємо стан на невідмічений
-  useEffect(() => {
-    if (isChecked === true) {
-      //dispatch({type: CHANGE_TODO, payload: item});
-    }
-  }, []);
-
   //авто фокус після створення
   useEffect(() => {
     inputRef.current.addEventListener('keydown', keydown);
     if (title == 'ㅤ') {
       settitle('');
-      dispatch({
-        type: SET_TITLE,
-        payload: {idTodo: item.idTodo, title: ''},
-      });
+
+      dispatch(setTitle(item, ''));
+
       inputRef.current.focus();
     }
     return () => {
@@ -121,8 +112,8 @@ let isActiveGroup= typeof idGroup ==='string'||idGroup >= now
         inputRef.current.removeEventListener('keydown', keydown);
     };
   });
-//if(typeof idGroup ==='string' )
- // style={idGroup < now ? {color: '#a8a8a893'} : {}}
+  //if(typeof idGroup ==='string' )
+  // style={idGroup < now ? {color: '#a8a8a893'} : {}}
   return (
     <div className='TodoItem' id={item.idTodo} key={item.idTodo}>
       <Radio

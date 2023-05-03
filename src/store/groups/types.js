@@ -2,3 +2,4 @@
 export const SET_CURRENT_GROUP_ID = "SET_CURRENT_GROUP_ID";
 export const CREATE_GROUP = "CREATE_GROUP";
 export const DELETE_GROUP = "DELETE_GROUP";
+export const SET_GROUPS = "SET_GROUPS";

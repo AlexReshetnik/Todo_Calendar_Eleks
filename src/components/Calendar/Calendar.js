@@ -44,7 +44,8 @@ function Calendar() {
     setEnd(roundOFF(e.target.value, 6));
   }
   function roundOFF(date, offset = 0) {
-    let start = new Date(date);
+    let start = new Date(date)
+    start.setHours(0, 0, 0, 0);
     let nDay = start.getDay() - 1;
     if (nDay == -1) {
       nDay = 6;
@@ -73,7 +74,9 @@ function Calendar() {
   }, []);
 
   return (
-    <div className='Calendar' ref={calendar}>
+    <div
+         ref={calendar}
+      className={`Calendar ${navigator.userAgentData.mobile ? 'phone':''}`}>
       <header>
         <input
           ref={startRef}

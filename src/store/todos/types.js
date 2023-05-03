@@ -1,9 +1,3 @@
-
-
-
-export const CREATE_TODO = "CREATE_TODO";
-export const DELETE_TODO = "DELETE_TODO";
-export const SET_TITLE = "SET_TITLE"; 
-export const CHANGE_TODO = "CHANGE_TODO";
-export const MOVE_TODO = "MOVE_TODO";
-export const SORT_TODO = "SORT_TODO";
+export const ADD_TODOS = "ADD_TODOS";
+export const DELETE_TODOS = "DELETE_TODOS";
+export const MODIFIED_TODOS = "MODIFIED_TODOS";
