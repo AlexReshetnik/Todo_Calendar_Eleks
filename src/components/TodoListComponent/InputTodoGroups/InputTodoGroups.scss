@@ -41,8 +41,8 @@
       font-size: 1em;
       @media screen and (max-width: 576px) {
         border-radius: 18px;
-        font-size: 1.5em;
-        height: 60px;
+        font-size: 1.7em;
+        height: 70px;
       }
       &::-webkit-input-placeholder {
         font-size: 0.8em;
@@ -75,7 +75,8 @@
         justify-content: space-between;
         border-bottom: 1px solid rgba(0, 0, 0, 0.233);
         @media screen and (max-width: 576px) {
-          height:  40px;
+          font-size: 1.1em;
+          height:  48px;
         }
         &:nth-last-child(1) {
           border-bottom: none;
