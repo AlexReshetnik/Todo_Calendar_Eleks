@@ -1,7 +1,7 @@
 {
   "name": "todo_calendar",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.1.2",
+  "private": false,
   "homepage": "https://AlexReshetnik.github.io/Todo_Calendar_Eleks",
   "dependencies": {
     "@emotion/react": "^11.10.6",
