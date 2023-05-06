@@ -2,7 +2,17 @@
   "short_name": "Success",
   "name": "Success",
   "icons": [
-       {
+    {
+      "src": "./32.png",
+      "sizes": "32x32",
+      "purpose": "maskable" 
+    },
+    {
+      "src": "./64.png",
+      "sizes": "64x64",
+      "purpose": "maskable" 
+    },
+    {
       "src": "./128.png",
       "sizes": "128x128",
       "purpose": "maskable" 
