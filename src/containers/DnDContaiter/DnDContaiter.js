@@ -1,13 +1,14 @@
-import {ReactSortable} from 'react-sortablejs';
+import {MultiDrag, ReactSortable, Sortable, Swap} from 'react-sortablejs';
 import {useDispatch, useSelector} from 'react-redux';
 import {memo, useEffect, useRef, useState} from 'react';
 import TodoItem from '../../components/TodoItem/TodoItem';
 import {createTodo, moveTodo, sortTodo} from '../../store/todos/actions';
-
+Sortable.mount(new MultiDrag(), new Swap());
 function DnDContaiter({idGroup}) {
   const dispatch = useDispatch();
   const containerRef = useRef();
   let now = new Date(Date.now()).setHours(0, 0, 0, 0);
+  const [list, setList] = useState([]);
   const todos = useSelector(
     state => {
       if (idGroup < now) {
@@ -19,16 +20,35 @@ function DnDContaiter({idGroup}) {
       }
     },
     (oldValue, newValue) => {
-      return oldValue.length == newValue.length;
+      if (oldValue.length !== newValue.length) {
+        return false;
+      }
+      for (const newTodo of oldValue) {
+        if (
+          newValue.find(
+            i =>
+              i.title === newTodo.title &&
+              i.isDeleted === newTodo.isDeleted &&
+              i.isChecked === newTodo.isChecked &&
+              i.idTodo === newTodo.idTodo
+          ) == undefined
+        ) {
+          return false;
+        }
+      }
+      return true;
     }
   );
+  
+  useEffect(() => {
+    setList(todos.sort((a, b) => a.key - b.key));
+  }, [todos]);
 
   const allTodos = useSelector(
     state => state.todos.todos,
     (oldValue, newValue) => oldValue.length == newValue.length
   );
-  const [list, setList] = useState([]);
-  const focusItem = useRef();
+ 
   function onAdd(e) {
     dispatch(moveTodo(e.item.id, e.to.parentNode.parentNode.parentNode.id));
   }
@@ -38,30 +58,25 @@ function DnDContaiter({idGroup}) {
     for (let l = 0; l < sortList.length; l++) {
       allTodos.find(i => i.idTodo == sortList[l].idTodo).key = l;
     }
-    console.log(sortList);
     setList(sortList);
     dispatch(sortTodo(sortList));
   }
   function onClickHandler(e) {
+    console.log('onClickHandler');
     if (e.target.parentNode === containerRef.current) {
       let item = todos.find(i => i.title.length <= 1);
+      console.log('parentNode');
       if (item == undefined) {
+        console.log('createTodo');
         dispatch(createTodo(idGroup, 'ㅤ'));
       } else {
         let el = document.getElementById(item.idTodo);
-        console.dir(el);
         el.childNodes[1].focus();
       }
     }
   }
 
-  useEffect(() => {
-    setList(todos.sort((a, b) => a.key - b.key));
-  }, [todos]);
 
-  useEffect(() => {
-    focusItem.current = list.find(i => i.title?.length < 1);
-  }, [list]);
 
   return (
     <div
@@ -89,7 +104,6 @@ function DnDContaiter({idGroup}) {
             key={item.idTodo}
             item={item}
             idGroup={idGroup}
-            focusItem={focusItem}
           />
         ))}
       </ReactSortable>

@@ -10,8 +10,6 @@
     .topHeader {
       position: absolute;
       background: rgb(253, 253, 253);
-     
-
       border-radius: 6px;
       font-size: 10px;
       padding: 0 4px;
@@ -66,6 +64,7 @@
         width: 100%;
         padding: 0 13px;
         display: flex;
+
         justify-content: space-between;
         border-bottom: 1px solid rgba(0, 0, 0, 0.233);
         &:nth-last-child(1) {
@@ -75,25 +74,38 @@
           color: #1976d2;
 
           .deleteIcon {
-            color: #1976d2;
-            opacity: 1;
+            svg {
+              color: #1976d2;
+              opacity: 1;
+            }
           }
         }
         .bloc {
           display: flex;
           align-items: center;
           justify-content: center;
-          .count {
-            margin: 2px 0;
-            width: 20px;
-          }
+        }
+        .count {
+          margin: 2px 0;
+          width: 20px;
+          text-align: center;
+          color: #1976d2;
+          opacity: 1;
         }
         .deleteIcon {
           display: flex;
           align-items: center;
           justify-content: center;
+          gap: 4px;
           transform: scale(0.85);
-          opacity: 0;
+          svg {
+            opacity: 0;
+            @media screen and (max-width: 576px) {
+              color: #1976d2;
+              opacity: 1;
+            }
+          
+          }
           &:hover {
             color: #1976d2;
             fill: #1976d2;

@@ -1,30 +1,42 @@
 import {memo, useEffect, useRef, useState} from 'react';
 import Day from '../Day/Day';
 import './Calendar.scss';
+import {useDispatch, useSelector} from 'react-redux';
+import {SET_END, SET_START} from '../../store/user/types';
+import roundOFF from '../../Methods/roundOFF';
 
 function Calendar() {
   let calendar = useRef();
 
   let startRef = useRef();
   let endRef = useRef();
+  let day = 3600 * 24 * 1000;
 
-  let [start, setStart] = useState(
-    new Date(localStorage.getItem('start') || Date.now())
+  const dispatch = useDispatch();
+
+  const start = useSelector(state => state.user.start);
+  const end = useSelector(state => state.user.end);
+
+  /*let [start, setStart] = useState(
+    new Date(localStorage.getItem('start') || roundOFF(Date.now()))
   );
   let [end, setEnd] = useState(
-    new Date(localStorage.getItem('end') || '2024-01-01')
-  );
+    new Date(localStorage.getItem('end') || roundOFF(Date.now() + day * 30))
+  );*/
+  let now = new Date(Date.now()).setHours(0, 0, 0, 0);
 
-  let day = 3600 * 24 * 1000;
+  setInterval(() => {
+    if (now != new Date(Date.now()).setHours(0, 0, 0, 0)) {
+      window.location.reload();
+    }
+  }, 1000 * 60 * 5);
   let countDays = (end - start) / day;
 
   function generate() {
     let res = [];
-    let now = new Date(Date.now()).setHours(0, 0, 0, 0);
 
     for (let i = 0; i <= countDays; i++) {
       let numeric = new Date(+start + i * day).setHours(0, 0, 0, 0);
-
       res.push(
         <Day
           key={numeric}
@@ -37,46 +49,29 @@ function Calendar() {
   }
 
   function onChangeSTART(e) {
-    setStart(roundOFF(e.target.value));
+    dispatch({type: SET_START, payload: {start: roundOFF(e.target.value)}});
   }
 
   function onChangeEND(e) {
-    setEnd(roundOFF(e.target.value, 6));
+    dispatch({type: SET_END, payload: {end: roundOFF(e.target.value, 6)}});
   }
-  function roundOFF(date, offset = 0) {
-    let start = new Date(date)
-    start.setHours(0, 0, 0, 0);
-    let nDay = start.getDay() - 1;
-    if (nDay == -1) {
-      nDay = 6;
-    }
-    start.setDate(start.getDate() - nDay + offset);
-    return start;
+
+  function timeToString(time) {
+    let arr = new Date(time).toLocaleDateString().split('.');
+    return `${arr[2]}-${arr[1]}-${arr[0]}`;
   }
 
   useEffect(() => {
-    localStorage.setItem('start', start);
-    localStorage.setItem('end', end);
-    startRef.current.value = start.toISOString().slice(0, 10);
-    endRef.current.value = end.toISOString().slice(0, 10);
+    startRef.current.value = timeToString(start);
+    endRef.current.value = timeToString(end);
   }, [start, end]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      let now = new Date(Date.now()).setHours(0, 0, 0, 0);
-      if (document.getElementById(`${now}`)) {
-        calendar.current.scrollTo({
-          top: document.getElementById(`${now}`).offsetTop - 100,
-          behavior: 'instant',
-        });
-      }
-    }, 50);
-  }, []);
 
   return (
     <div
-         ref={calendar}
-      className={`Calendar ${/*navigator.userAgentData.mobile ? 'phone':''*/''}`}>
+      ref={calendar}
+      className={`Calendar ${
+        /*navigator.userAgentData.mobile ? 'phone':''*/ ''
+      }`}>
       <header>
         <input
           ref={startRef}

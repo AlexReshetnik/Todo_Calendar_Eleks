@@ -5,30 +5,10 @@ import {
   DELETE_GROUP,
   SET_GROUPS,
 } from './types';
-import {v4 as uuid} from 'uuid';
-
-// variables
-const USER_DATA_KEY = 'GROUPS'; // name of localStorage key
-let LSdata = localStorage.getItem(USER_DATA_KEY);
-
-
-/*setTimeout(() => {
-  const USER_DATA_KEY = 'GROUPS';
-  let LSdata = localStorage.getItem(USER_DATA_KEY);
-  if (LSdata) {
-    let groups = JSON.parse(LSdata);
-    console.log(groups);
-    groups.groups.forEach(el => {
-      addNewGroup(el.id,el.title);
-    });
-    localStorage.removeItem(USER_DATA_KEY)
-  }
-}, 3000);*/
-
 
 let initialState = {
   currentGroupID: null,
-  groups: [{id: 0, title: ''}],
+  groups: [],
 };
 
 const groupsReducer = (state = initialState, action) => {
@@ -64,7 +44,7 @@ const groupsReducer = (state = initialState, action) => {
 
       break;
   }
-  //localStorage.setItem(USER_DATA_KEY, JSON.stringify(state));
+ 
   state.groups = state.groups.slice();
   return state;
 };

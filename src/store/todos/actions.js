@@ -12,8 +12,8 @@ export const createTodo = (idGroup, title) => async dispatch => {
   });
 };
 
-export const addTodos = () => async (dispatch, getState) => {
-  db.addTodos(dispatch);
+export const addTodos = (start,end) => async (dispatch, getState) => {
+  db.addTodos(dispatch,start,end);
 };
 
 export const setTitle = (todo, title) => async dispatch => {

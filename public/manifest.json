@@ -1,7 +1,8 @@
 
 {
-  "short_name": "Todo Calendar",
-  "name": "Create React App Sample",
+  "id":"Success",
+  "short_name": "Success",
+  "name": "Success",
   "icons": [
     {
       "src": "favicon.ico",

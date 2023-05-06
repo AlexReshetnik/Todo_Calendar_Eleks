@@ -1,8 +1,4 @@
-import {
-  DELETE_TODOS,
-  MODIFIED_TODOS,
-  ADD_TODOS,
-} from './types';
+import {DELETE_TODOS, MODIFIED_TODOS, ADD_TODOS} from './types';
 
 let initialState = {
   todos: [],
@@ -10,38 +6,43 @@ let initialState = {
 
 const todosReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_TODOS:
-      state = {
-        ...state,
-        todos: [
-          ...state.todos.filter(i => i.idTodo !== action.payload.todo.idTodo),
-          action.payload.todo,
-        ],
-      };
-      break;
-
-
-
+    case ADD_TODOS: {
+      let index = state.todos.findIndex(
+        i => i.idTodo === action.payload.todo.idTodo
+      );
+      if (index == -1) {
+        return {
+          ...state,
+          todos: [...state.todos, action.payload.todo],
+        };
+      } else {
+        return {
+          ...state,
+          todos: [...state.todos],
+        };
+      }
+    }
     case DELETE_TODOS:
-      state = {
-        ...state,
-        todos: state.todos.filter(i => i.idTodo !== action.payload.todo.idTodo),
-      };
-      break;
-    case MODIFIED_TODOS:
-      state = {
+      return {
         ...state,
         todos: [
           ...state.todos.filter(i => i.idTodo !== action.payload.todo.idTodo),
-          action.payload.todo,
         ],
       };
-      break;
 
+    case MODIFIED_TODOS:
+      let index = state.todos.findIndex(
+        i => i.idTodo === action.payload.todo.idTodo
+      );
+      state.todos[index] = action.payload.todo;
+      return {
+        ...state,
+        todos: [...state.todos],
+      };
+
+    default:
+      return state;
   }
-
-  state.todos = state.todos.slice();
-  return {...state, todos: state.todos};
 };
 
 export default todosReducer;

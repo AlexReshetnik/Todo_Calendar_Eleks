@@ -2,7 +2,10 @@
   display: flex;
   flex-direction: row;
   border-bottom: 0.1px solid rgba(0, 0, 0, 0.233);
+  animation: show 1000ms;
 
+ 
+ 
   .Radio {
     margin: 3px;
     width: 25px;
@@ -25,7 +28,16 @@
   }
 }
 .deleing {
-  animation: deleing 2200ms;
+  animation: deleing 5000ms;
+}
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes deleing {
@@ -33,12 +45,10 @@
     opacity: 1;
   }
 
-  80% {
+  50% {
     opacity: 1;
-    transform: translateY(0%) scaleY(100%);
   }
   to {
     opacity: 0;
-    transform: translateY(-50%) scaleY(0%);
   }
 }

@@ -78,7 +78,14 @@ function InputTodoGroups() {
 
   function deleteHandler(e) {
     let targetid = e.currentTarget.getAttribute('value');
-    dispatch(deleteGroup(targetid));
+    if (
+      window.confirm(
+        'Дійсно бажаєте видалити групу - ' +
+          listGroups.find(i => i.id == targetid)?.title
+      )
+    ) {
+      dispatch(deleteGroup(targetid));
+    }
     e.stopPropagation();
   }
 
@@ -108,10 +115,10 @@ function InputTodoGroups() {
   useEffect(() => {
     if (listGroups.length > 0) {
       if (!listGroups.find(i => i.id === currentGroupID)) {
-        setValue(listGroups[0].title);
+        //setValue(listGroups[0].title);// баг стибає текст в групах при завантаженні
       }
     } else {
-      addHandler(false);
+      //addHandler();//баг стакання груп
       setIsOpenDropDownList(false);
     }
   }, [listGroups]);

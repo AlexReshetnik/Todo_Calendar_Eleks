@@ -5,16 +5,25 @@ import {memo, useEffect, useRef, useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {createTodo, deteleTodo, setTitle} from '../../store/todos/actions';
 
-function TodoItem({item, idGroup, focusItem}) {
+function TodoItem({item, idGroup}) {
   const inputRef = useRef();
   const selectionStart = useRef();
   const dispatch = useDispatch();
   const dropDownListTimer = useRef();
   const setTitleTimer = useRef();
+
   const [title, settitle] = useState(item.title);
+  useEffect(() => {
+    settitle(item.title);
+  }, [item.title]);
   const [isChecked, setIsChecked] = useState(item.isDeleted);
+
+  useEffect(() => {
+    setIsChecked(item.isDeleted);
+  }, [item.isDelete]);
   let now = new Date(Date.now()).setHours(0, 0, 0, 0);
   let isActiveGroup = typeof idGroup === 'string' || idGroup >= now;
+
   //подія видалення todo
   function handleChange(e) {
     setIsChecked(prev => !prev);
@@ -24,13 +33,12 @@ function TodoItem({item, idGroup, focusItem}) {
     item.isDeleted = !item.isDeleted;
     if (isActiveGroup) {
       document.getElementById(`${item.idTodo}`).classList.add('deleing');
-      dropDownListTimer.current = setTimeout(() => {
-        dispatch(deteleTodo(item));
-        window.navigator.vibrate(50);
-      }, 2000);
-    } else {
-      dispatch(deteleTodo(item));
     }
+    dropDownListTimer.current = setTimeout(() => {
+      dispatch(deteleTodo(item));
+      console.log('delete');
+      window.navigator.vibrate(50);
+    }, 4000);
   }
 
   //подія onChange
@@ -39,14 +47,10 @@ function TodoItem({item, idGroup, focusItem}) {
     let newStr = str && str[0].toUpperCase() + str.slice(1);
     settitle(newStr);
 
-    if (newStr.length > 2) {
-      clearTimeout(setTitleTimer.current);
-      setTitleTimer.current = setTimeout(() => {
-        dispatch(setTitle(item, newStr));
-      }, 1000);
-    } else {
+    clearTimeout(setTitleTimer.current);
+    setTitleTimer.current = setTimeout(() => {
       dispatch(setTitle(item, newStr));
-    }
+    }, 1000);
   }
 
   function onFocus(e) {
@@ -72,14 +76,7 @@ function TodoItem({item, idGroup, focusItem}) {
           title !== '' &&
           title !== 'ㅤ'
         ) {
-          if (focusItem.current && focusItem.current.idTodo != item.idTodo) {
-            let el = document.getElementById(focusItem.current.idTodo)
-              .childNodes[1];
-            el.focus();
-          } else {
-            dispatch(createTodo(idGroup, 'ㅤ'));
-          }
-          focusItem.current = null;
+          dispatch(createTodo(idGroup, 'ㅤ'));
         }
       }
       e.preventDefault();
@@ -104,7 +101,6 @@ function TodoItem({item, idGroup, focusItem}) {
       settitle('');
 
       dispatch(setTitle(item, ''));
-
       inputRef.current.focus();
     }
     return () => {
@@ -112,8 +108,7 @@ function TodoItem({item, idGroup, focusItem}) {
         inputRef.current.removeEventListener('keydown', keydown);
     };
   });
-  //if(typeof idGroup ==='string' )
-  // style={idGroup < now ? {color: '#a8a8a893'} : {}}
+
   return (
     <div className='TodoItem' id={item.idTodo} key={item.idTodo}>
       <Radio
@@ -139,13 +134,12 @@ function TodoItem({item, idGroup, focusItem}) {
 
 export default memo(TodoItem, (prev, next) => {
   return (
-    prev.item.idGroup == next.item.idGroup &&
-    prev.item.idTodo == next.item.idTodo &&
-    prev.item.title == next.item.title &&
+    prev.item.idGroup === next.item.idGroup &&
+    prev.item.idTodo === next.item.idTodo &&
+    prev.item.title === next.item.title &&
     !next.isChecked &&
-    prev.item.isDeleted == next.item.isDeleted &&
-    prev.item.key == next.item.key &&
-    prev.idGroup == next.idGroup &&
-    prev.focusItem.current == next.focusItem.current
+    prev.item.isDeleted === next.item.isDeleted &&
+    prev.item.key === next.item.key &&
+    prev.idGroup === next.idGroup
   );
 });
