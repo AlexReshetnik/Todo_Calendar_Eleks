@@ -2,10 +2,11 @@
   display: flex;
   flex-direction: row;
   border-bottom: 0.1px solid rgba(0, 0, 0, 0.233);
-  animation: show 1000ms;
 
- 
- 
+  @media (min-width: 576px) {
+    animation: show 1000ms;
+  }
+
   .Radio {
     margin: 3px;
     width: 25px;
@@ -17,6 +18,9 @@
     & {
       color: #99999999;
     }
+    @media screen and (max-width: 576px) {
+      transform: scale(1.1) translate(-2px,1px) ;
+    }
   }
   textarea {
     width: 90%;
@@ -25,6 +29,9 @@
     outline: none;
     resize: none;
     padding: 8px 0 6px 0;
+    @media screen and (max-width: 576px) {
+      font-size: 1.1em;
+    }
   }
 }
 .deleing {

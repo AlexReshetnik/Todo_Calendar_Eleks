@@ -3,6 +3,7 @@
   flex-direction: row;
   position: relative;
   align-items: center;
+
   .content {
     width: 100%;
     z-index: 2;
@@ -34,11 +35,15 @@
       width: 100%;
       border: none;
       border: 0.1px solid rgba(0, 0, 0, 0.102);
-
       outline: none;
       border-radius: 12px;
       color: #000000;
       font-size: 1em;
+      @media screen and (max-width: 576px) {
+        border-radius: 18px;
+        font-size: 1.5em;
+        height: 60px;
+      }
       &::-webkit-input-placeholder {
         font-size: 0.8em;
       }
@@ -60,13 +65,18 @@
       border-radius: 12px;
       width: 100%;
       background: rgb(243, 243, 243);
+      @media screen and (max-width: 576px) {
+        font-size: 1.18em;
+      }
       .MenuItem {
         width: 100%;
         padding: 0 13px;
         display: flex;
-
         justify-content: space-between;
         border-bottom: 1px solid rgba(0, 0, 0, 0.233);
+        @media screen and (max-width: 576px) {
+          height:  40px;
+        }
         &:nth-last-child(1) {
           border-bottom: none;
         }
@@ -91,6 +101,9 @@
           text-align: center;
           color: #1976d2;
           opacity: 1;
+          @media screen and (max-width: 576px) {
+            font-size: 1em;
+          }
         }
         .deleteIcon {
           display: flex;
@@ -98,13 +111,15 @@
           justify-content: center;
           gap: 4px;
           transform: scale(0.85);
+          @media screen and (max-width: 576px) {
+            transform: scale(1);
+          }
           svg {
             opacity: 0;
             @media screen and (max-width: 576px) {
               color: #1976d2;
               opacity: 1;
             }
-          
           }
           &:hover {
             color: #1976d2;
@@ -114,6 +129,9 @@
         .openIcon {
           margin-top: 5px;
           transform: scale(0.8);
+          @media screen and (max-width: 576px) {
+            transform: scale(0.9);
+          }
         }
       }
     }
@@ -140,6 +158,13 @@
     &:hover {
       color: #1976d2;
     }
+    @media screen and (max-width: 576px) {
+      left: 75%;
+      transform: scale(1.35);
+      &.active {
+        transform: scale(1.35) rotate(180deg);
+      }
+    }
   }
   .btAdd {
     box-shadow: 0px 0px 5px -1px rgba(0, 0, 0, 0.295);
@@ -159,5 +184,9 @@
     &:active {
       color: #1359a0;
     }
+    @media screen and (max-width: 576px) {
+      left: 88%;
+      transform: scale(1.5);
+     }
   }
 }
