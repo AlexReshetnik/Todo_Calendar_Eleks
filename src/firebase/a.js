@@ -84,7 +84,7 @@ function initSnapshot(q, dispatch, idGroup) {
   return onSnapshot(q, {includeMetadataChanges: true}, snapshot => {
     snapshot.docChanges().forEach(change => {
       let todo = change.doc.data();
-      console.log(change.type, todo.idTodo);
+      //console.log(change.type, todo.idTodo);
      /* if (todo.idTodo === undefined) {
         setTimeout(() => {
           completeRemoval({idGroup: idGroup, idTodo: change.doc.id});

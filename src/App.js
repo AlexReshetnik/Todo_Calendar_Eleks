@@ -24,12 +24,32 @@ function App() {
       setSizes(['30%', '70%']);
     }
   }
-  const [isPortrait, setOrientation] = useState(
-    window.screen.orientation.type.includes('portrait')
-  );
-  window.screen.orientation.onchange = e => {
-    setOrientation(e.target.type.includes('portrait'));
-  };
+
+  let readDeviceOrientation;
+  const [isPortrait, setOrientation] = useState(false);
+  if (window.screen.orientation) {
+    window.screen.orientation.onchange = e => {
+      setOrientation(e.target.type.includes('portrait'));
+    };
+  } else {
+    readDeviceOrientation = () => {
+      if (Math.abs(window.orientation) === 90) {
+        setOrientation(false);
+      } else {
+        setOrientation(true);
+      }
+    };
+
+    window.onorientationchange = readDeviceOrientation;
+  }
+  useEffect(() => {
+    if (window.screen.orientation) {
+      setOrientation(window.screen.orientation.type.includes('portrait'));
+    } else {
+      readDeviceOrientation();
+    }
+  });
+
   //console.log(window.innerWidth, isPortrait);
   //portrait//вертикальне
   //landscape//горизонтальне
