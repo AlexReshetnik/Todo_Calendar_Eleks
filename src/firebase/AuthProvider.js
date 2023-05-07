@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {app, googleAuthProvider} from './firebase';
-import {getAuth, signInWithPopup} from 'firebase/auth';
+import {getAuth, signInWithPopup, signInWithRedirect} from 'firebase/auth';
 import {init} from './a';
 import {useDispatch, useSelector} from 'react-redux';
 import {USER_AUTH} from '../store/user/types';
@@ -20,7 +20,7 @@ export const AuthProvider = ({children}) => {
       if (maybeUser != null) {
         return setUser(maybeUser);
       } else {
-        signInWithPopup(auth, googleAuthProvider)
+        signInWithRedirect(auth, googleAuthProvider)
           .then(credentials => {
             //console.log(credentials.user);
             setUser(credentials.user);
