@@ -20,16 +20,22 @@ export const AuthProvider = ({children}) => {
       if (maybeUser != null) {
         return setUser(maybeUser);
       } else {
-        signInWithPopup(auth, googleAuthProvider)
-          .then(credentials => {
-            //console.log(credentials.user);
-            setUser(credentials.user);
-          })
-          .cath(err => console.log(err));
+        fffff();
+
+        //  .cath(err => console.log(err));
       }
     });
     return unsub;
   }, [auth]);
+
+  async function fffff(params) {
+    const credential = await GoogleAuthProvider.credential(
+      googleUser.getAuthResponse().id_token
+    );
+    const result = await signInWithCredential(auth, credential);
+
+    setUser(result);
+  }
 
   useEffect(() => {
     if (!user) return;
