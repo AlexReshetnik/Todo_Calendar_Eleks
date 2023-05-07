@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {app, googleAuthProvider} from './firebase';
-import {getAuth, signInWithPopup, signInWithRedirect} from 'firebase/auth';
+import {GoogleAuthProvider, getAuth, getRedirectResult, signInWithPopup, signInWithRedirect} from 'firebase/auth';
 import {init} from './a';
 import {useDispatch, useSelector} from 'react-redux';
 import {USER_AUTH} from '../store/user/types';
@@ -20,21 +20,20 @@ export const AuthProvider = ({children}) => {
       if (maybeUser != null) {
         return setUser(maybeUser);
       } else {
-        fffff();
-
-        //  .cath(err => console.log(err));
+        authFF(auth)
       }
     });
     return unsub;
   }, [auth]);
 
-  async function fffff(params) {
-    const credential = await GoogleAuthProvider.credential(
-      googleUser.getAuthResponse().id_token
-    );
-    const result = await signInWithCredential(auth, credential);
-
-    setUser(result);
+  async function authFF(auth) {
+    await signInWithRedirect(auth, new GoogleAuthProvider());
+    // After the page redirects back
+    const userCred = await getRedirectResult(auth);
+console.log(userCred);
+    // After
+    // ==============
+  //c//onst userCred = await signInWithPopup(auth, new GoogleAuthProvider());
   }
 
   useEffect(() => {
