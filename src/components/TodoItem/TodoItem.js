@@ -49,6 +49,7 @@ function TodoItem({item, idGroup}) {
 
     clearTimeout(setTitleTimer.current);
     setTitleTimer.current = setTimeout(() => {
+     
       dispatch(setTitle(item, newStr));
     }, 1000);
   }
@@ -76,7 +77,7 @@ function TodoItem({item, idGroup}) {
           title !== '' &&
           title !== 'ㅤ'
         ) {
-          dispatch(createTodo(idGroup, 'ㅤ'));
+          dispatch(createTodo(idGroup));
         }
       }
       e.preventDefault();

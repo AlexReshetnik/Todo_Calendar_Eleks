@@ -61,14 +61,13 @@ function DnDContaiter({idGroup}) {
     setList(sortList);
     dispatch(sortTodo(sortList));
   }
+
   function onClickHandler(e) {
-    console.log('onClickHandler');
     if (e.target.parentNode === containerRef.current) {
       let item = todos.find(i => i.title.length <= 1);
-      console.log('parentNode');
-      if (item == undefined) {
-        console.log('createTodo');
-        dispatch(createTodo(idGroup, 'ㅤ'));
+
+      if (item === undefined) {
+        dispatch(createTodo(idGroup));
       } else {
         let el = document.getElementById(item.idTodo);
         el.childNodes[1].focus();

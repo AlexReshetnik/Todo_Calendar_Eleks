@@ -11,7 +11,7 @@ import {createTodo} from '../todos/actions';
 export const createGroup = title => async dispatch => {
   let id = uuid();
   await db.addNewGroup(id, title, dispatch);
-  dispatch(createTodo(id, 'ㅤ'));
+  dispatch(createTodo(id));
   dispatch({type: CREATE_GROUP, payload: {id: id, title: title}});
 };
 

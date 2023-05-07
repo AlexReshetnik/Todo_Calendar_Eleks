@@ -30,7 +30,8 @@ export const init = async currentUser => {
   return true;
 };
 
-//--------------GROUP--------------------------
+//--------------GROUP-------------------------
+
 export const addNewGroup = async (id, title2, dispatch) => {
   await setDoc(doc(db, 'users', user.uid, 'groups', id), {
     title: title2,
@@ -72,23 +73,24 @@ export const setCurrentGroup = async id => {
 
 function clear(todo) {
   if (todo.title?.length < 2) {
-    console.log('clear----------------');
+    console.log('clear----------------', todo.idTodo);
     completeRemoval(todo);
   }
 }
 let timerId = {};
+
 //--------------TODO--------------------------
 function initSnapshot(q, dispatch, idGroup) {
   return onSnapshot(q, {includeMetadataChanges: true}, snapshot => {
     snapshot.docChanges().forEach(change => {
       let todo = change.doc.data();
-      //console.log(change.type,todo);
-      if (!todo.idTodo) {
+      console.log(change.type, todo.idTodo);
+     /* if (todo.idTodo === undefined) {
         setTimeout(() => {
           completeRemoval({idGroup: idGroup, idTodo: change.doc.id});
-        }, 5000);
+        }, 0);
         return;
-      }
+      }*/
       if (change.type === 'added' && todo.idTodo) {
         dispatch({type: ADD_TODOS, payload: {todo: todo}});
       }
@@ -107,7 +109,7 @@ function initSnapshot(q, dispatch, idGroup) {
         timerId[todo.idTodo] = undefined;
       }
 
-      if (todo.title?.length < 2) {
+      if (!todo.title || todo.title.length < 2) {
         timerId[todo.idTodo] = setTimeout(clear, 10000, todo);
       }
       //const source = snapshot.metadata.fromCache ? 'local cache' : 'server';
@@ -159,19 +161,20 @@ export const getDays = async (start, end) => {
 };
 
 export const createTodo = async newTodo => {
-  newTodo.idGroup += '';
   let type = +newTodo.idGroup ? 'days' : 'groups';
-  if (type == 'days' && days.find(i => +i == +newTodo.idGroup) == undefined) {
+  newTodo.idGroup += '';
+  /* if (type === 'days' && days.find(i => +i == +newTodo.idGroup) == undefined) {
     await setDoc(doc(db, 'users', user.uid, type, newTodo.idGroup), {});
-  }
+  }*/
 
   await setDoc(
     doc(db, 'users', user.uid, type, newTodo.idGroup, 'todos', newTodo.idTodo),
-    {...newTodo}
+    newTodo
   );
 };
 
 export const setTitle = async (todo, title) => {
+  console.log(todo.idTodo, '----', title);
   todo.idGroup += '';
   let type = +todo.idGroup ? 'days' : 'groups';
   await updateDoc(
@@ -197,7 +200,7 @@ export const deteleTodo = async todo => {
 
 async function completeRemoval(todo) {
   let type = +todo.idGroup ? 'days' : 'groups';
-  await updateDoc(
+  /*await updateDoc(
     doc(db, 'users', user.uid, type, todo.idGroup, 'todos', todo.idTodo),
     {
       idGroup: deleteField(),
@@ -206,19 +209,18 @@ async function completeRemoval(todo) {
       isChecked: deleteField(),
       isDeleted: deleteField(),
       key: deleteField(),
+      chosen: deleteField(),
     }
-  );
+  );*/
 
   await deleteDoc(
     doc(db, 'users', user.uid, type, todo.idGroup, 'todos', todo.idTodo)
   );
 }
 
-export const moveTodo = async (idTodo, targetContainerID, todos) => {
-  let todo = todos.find(i => i.idTodo == idTodo);
+export const moveTodo = async (todo, targetContainerID) => {
   await completeRemoval(todo);
-  todo.idGroup = targetContainerID;
-  await createTodo(todo);
+  await createTodo({...todo, idGroup: targetContainerID});
 };
 
 export const sortTodo = async sortList => {

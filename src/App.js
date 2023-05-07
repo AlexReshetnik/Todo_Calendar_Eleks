@@ -30,7 +30,7 @@ function App() {
   window.screen.orientation.onchange = e => {
     setOrientation(e.target.type.includes('portrait'));
   };
-  console.log(window.innerWidth, isPortrait);
+  //console.log(window.innerWidth, isPortrait);
   //portrait//вертикальне
   //landscape//горизонтальне
 

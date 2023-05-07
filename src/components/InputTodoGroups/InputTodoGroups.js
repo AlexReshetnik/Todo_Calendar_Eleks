@@ -2,7 +2,7 @@ import './InputTodoGroups.scss';
 import {useEffect, useRef, useState} from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import {ReactComponent as BlackFolder} from '../../../assets/icons/black_folder.svg';
+import {ReactComponent as BlackFolder} from '../../assets/icons/black_folder.svg';
 import ArrowDownwardOutlinedIcon from '@mui/icons-material/ArrowDownwardOutlined';
 import {useSelector, useDispatch} from 'react-redux';
 import {
@@ -10,7 +10,7 @@ import {
   deleteGroup,
   setCurrentGroup,
   setGroups,
-} from '../../../store/groups/actions';
+} from '../../store/groups/actions';
 
 function InputTodoGroups() {
   const inputRef = useRef();
@@ -37,8 +37,7 @@ function InputTodoGroups() {
 
   function onChange(e) {
     let str = e.target.value;
-    let newStr = str[0]?.toUpperCase() + str.slice(1);
-    setValue(newStr);
+    setValue(str.length > 1 ? str[0]?.toUpperCase() + str.slice(1) : str);
   }
 
   function onFocus(e) {

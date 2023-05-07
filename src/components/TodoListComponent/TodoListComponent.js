@@ -1,4 +1,4 @@
-import InputTodoGroups from './InputTodoGroups/InputTodoGroups';
+import InputTodoGroups from '../InputTodoGroups/InputTodoGroups';
 import TodoList from '../TodoList/TodoList';
 import './TodoListComponent.scss';
 import {memo} from 'react';
@@ -6,9 +6,7 @@ import {memo} from 'react';
 function TodoListComponent() {
   return (
     <div
-      className={`TodoListComponent ${""
-      //  navigator.userAgentData.mobile ? 'phone' : ''
-      }`}>
+      className={`TodoListComponent`}>
       <InputTodoGroups />
       <TodoList />
     </div>
