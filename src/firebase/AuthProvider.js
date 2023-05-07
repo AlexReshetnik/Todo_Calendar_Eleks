@@ -20,7 +20,7 @@ export const AuthProvider = ({children}) => {
       if (maybeUser != null) {
         return setUser(maybeUser);
       } else {
-        signInWithRedirect(auth, googleAuthProvider)
+        signInWithPopup(auth, googleAuthProvider)
           .then(credentials => {
             //console.log(credentials.user);
             setUser(credentials.user);
