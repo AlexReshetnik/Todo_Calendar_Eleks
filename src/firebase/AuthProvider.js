@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {app, googleAuthProvider} from './firebase';
-import {GoogleAuthProvider, getAuth, getRedirectResult, signInWithPopup, signInWithRedirect} from 'firebase/auth';
+import {GoogleAuthProvider, browserPopupRedirectResolver, getAuth, signInWithPopup} from 'firebase/auth';
 import {init} from './a';
 import {useDispatch, useSelector} from 'react-redux';
 import {USER_AUTH} from '../store/user/types';
@@ -20,21 +20,16 @@ export const AuthProvider = ({children}) => {
       if (maybeUser != null) {
         return setUser(maybeUser);
       } else {
-        authFF(auth)
+        signInWithPopup(auth, new GoogleAuthProvider(),browserPopupRedirectResolver)
+          .then(credentials => {
+            //console.log(credentials.user);
+            setUser(credentials.user);
+          })
+          .cath(err => console.log(err));
       }
     });
     return unsub;
   }, [auth]);
-
-  async function authFF(auth) {
-    await signInWithRedirect(auth, new GoogleAuthProvider());
-    // After the page redirects back
-    const userCred = await getRedirectResult(auth);
-console.log(userCred);
-    // After
-    // ==============
-  //c//onst userCred = await signInWithPopup(auth, new GoogleAuthProvider());
-  }
 
   useEffect(() => {
     if (!user) return;

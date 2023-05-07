@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import {initializeApp} from 'firebase/app';
-import {GoogleAuthProvider} from 'firebase/auth';
+import {GoogleAuthProvider, browserLocalPersistence, indexedDBLocalPersistence} from 'firebase/auth';
 import {getFirestore,initializeFirestore,persistentLocalCache,persistentMultipleTabManager} from '@firebase/firestore';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -19,6 +19,7 @@ const firebaseConfig = {
 
 export const app = initializeApp(firebaseConfig);
 initializeFirestore(app, {
+  persistence: [indexedDBLocalPersistence, browserLocalPersistence],
   localCache: persistentLocalCache(
     /*settings*/ {tabManager: persistentMultipleTabManager()}
   ),
